@@ -1,17 +1,22 @@
 import "./App.css";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import LineChart from "./components/LineChart.js";
 import BarChart from "./components/BarChart";
 
-import { LaunchData } from "./placeholderData";
-
 function App() {
+  const [launchesData, setLaunchesData] = useState([]);
+
+  useEffect(() => {
+    axios.get("/api").then((response) => setLaunchesData(response.data));
+  }, []);
+
   const [launchyData, setLaunchyData] = useState({
-    labels: LaunchData.map((data) => data.name),
+    labels: launchesData.map((data) => data.name),
     datasets: [
       {
         label: "success rate",
-        data: LaunchData.map((data) => data.success),
+        data: launchesData.map((data) => data.success),
       },
     ],
   });
@@ -19,6 +24,13 @@ function App() {
   return (
     <div className="App">
       <h1>Hello!</h1>
+      <div>
+        <div>
+          {launchesData.map((launch, index) => {
+            return <p key={index}>success: {launch.success}</p>;
+          })}
+        </div>
+      </div>
       <div style={{ width: 800 }}>
         <LineChart chartData={launchyData}></LineChart>
         <BarChart chartData={launchyData}></BarChart>
