@@ -11,13 +11,13 @@ app = FastAPI()
 
 class Launch(BaseModel):
     date: int
-    success: bool
+    success: int
     name: str
 
 
 DB: List[Launch] = [
-    Launch(date=22, success=False, name="sad_fail_rocket"),
-    Launch(date=240598, success=True, name="Epic cool rocket")
+    Launch(date=22, success=50, name="sad_fail_rocket"),
+    Launch(date=240598, success=100, name="Epic cool rocket")
 ]
 
 
