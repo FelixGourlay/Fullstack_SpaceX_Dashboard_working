@@ -1,4 +1,5 @@
-from typing import Union, List
+from pickle import TRUE
+from typing import List
 
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -15,7 +16,8 @@ class Launch(BaseModel):
 
 
 DB: List[Launch] = [
-    Launch(date=22, success=False, name="sad_fail_rocket")
+    Launch(date=22, success=False, name="sad_fail_rocket"),
+    Launch(date=240598, success=True, name="Epic cool rocket")
 ]
 
 
