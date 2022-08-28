@@ -1,24 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
+import {useState, useEffect} from 'react'
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+  const [launch, setLaunch] = useState([]);
+
+  useEffect(()=>{
+    axios.get('/api').then(response => setLaunch(response.data));
+  }, []);
+
+  return launch.map((p,index) => {
+    return <p key={index}>Date: {p.date} <br/> Rocket Name: {p.name}<br/> Success: {p.success}<br/></p>
+  }
+  
   );
 }
 
