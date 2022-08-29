@@ -13,6 +13,8 @@ import {
 } from "chart.js";
 import { Bar, Line } from "react-chartjs-2";
 import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRocket } from "@fortawesome/free-solid-svg-icons";
 
 ChartJS.register(
   CategoryScale,
@@ -65,50 +67,54 @@ function App() {
       .then((response) => setLaunchesData(response.data));
     setBarChartOptions({
       responsive: true,
-      plugins: {
-        legend: {
-          position: "top",
-        },
-        title: {
-          display: true,
-          text: "Rocket success",
-        },
-      },
+      maintainAspectRatio: false,
     });
     setLineChartOptions({
       responsive: true,
-      plugins: {
-        title: {
-          display: true,
-          text: "Sucess by year",
-        },
-      },
+      maintainAspectRatio: false,
     });
   }, []);
 
   return (
     <div className="App">
-      <h1>SpaceX Success Dashboard</h1>
-      <div id="barChartDiv" style={{ width: 800 }}>
-        <h2>Individual rocket success:</h2>
-        <Bar id="Bar" options={barChartOptions} data={barChartData} />
+      <div className="DashboardTitle">SpaceX Success Dashboard</div>
+      <div className="DashboardSection">
+        <div className="SectionTitle">Individual rocket success:</div>
+        <div className="DashboardOutput">
+          <div className="ChartContainer">
+            <div className="BarChart">
+              <Bar id="Bar" options={barChartOptions} data={barChartData} />
+            </div>
+          </div>
+        </div>
       </div>
-      <div id="lineChartDiv" style={{ width: 800 }}>
-        <h2>Average Success by Year:</h2>
-        <Line id="line" options={LineChartOptions} data={lineChartData} />
+      <div className="DashboardSection">
+        <div className="SectionTitle">Average Success by Year:</div>
+        <div className="DashboardOutput">
+          <div className="ChartContainer">
+            <div className="LineChart">
+              <Line id="line" options={LineChartOptions} data={lineChartData} />
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <div id="individual Launch stats">
-          <h2>Individual Launch Details</h2>
-          {launchesData.map((launch, index) => {
-            return (
-              <p key={index}>
-                Date: {launch.date} <br />
-                Name: {launch.name} <br />
-                success: {launch.success}
-              </p>
-            );
-          })}
+      <div className="DashboardSection">
+        <div className="SectionTitle">Individual Launch Details</div>
+        <div className="DashboardOutput">
+          <div className="TileContainer">
+            {launchesData.map((launch, index) => {
+              return (
+                <div className="LaunchInfoTile">
+                  {/* <FontAwesomeIcon icon=(faRocket) /> */}
+                  <p key={index}>
+                    Date: {launch.date} <br />
+                    Name: {launch.name} <br />
+                    success: {launch.success}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
