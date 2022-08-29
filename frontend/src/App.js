@@ -21,9 +21,6 @@ ChartJS.register(
   Legend
 );
 
-// import LineChart from "./components/LineChart.js";
-// import BarChart from "./components/BarChart";
-
 function App() {
   const [chartData, setChartData] = useState({
     datasets: [],
@@ -32,7 +29,7 @@ function App() {
   const [chartOptions, setChartOptions] = useState({});
 
   useEffect(() => {
-    axios.get("/api").then((response) =>
+    axios.get("/api/launches").then((response) =>
       setChartData({
         labels: response.data.map((data) => data.name),
         datasets: [
