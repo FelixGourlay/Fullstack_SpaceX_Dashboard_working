@@ -1,39 +1,68 @@
 import "./App.css";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import LineChart from "./components/LineChart.js";
-import BarChart from "./components/BarChart";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
+import React, { useState, useEffect } from "react";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+// import LineChart from "./components/LineChart.js";
+// import BarChart from "./components/BarChart";
 
 function App() {
-  const [launchesData, setLaunchesData] = useState([]);
+  const [chartData, setChartData] = useState({
+    datasets: [],
+  });
+
+  const [chartOptions, setChartOptions] = useState({});
 
   useEffect(() => {
-    axios.get("/api").then((response) => setLaunchesData(response.data));
-  }, []);
+    axios.get("/api").then((response) =>
+      setChartData({
+        labels: response.data.map((data) => data.name),
+        datasets: [
+          {
+            Label: "success rate",
+            data: response.data.map((data) => data.success),
+          },
+        ],
+      })
+    );
 
-  const [launchyData, setLaunchyData] = useState({
-    labels: launchesData.map((data) => data.name),
-    datasets: [
-      {
-        label: "success rate",
-        data: launchesData.map((data) => data.success),
+    setChartOptions({
+      responsive: true,
+      plugins: {
+        legend: {
+          position: "top",
+        },
+        title: {
+          display: true,
+          text: "Rocket success",
+        },
       },
-    ],
-  });
+    });
+  }, []);
 
   return (
     <div className="App">
       <h1>Hello!</h1>
-      <div>
-        <div>
-          {launchesData.map((launch, index) => {
-            return <p key={index}>success: {launch.success}</p>;
-          })}
-        </div>
-      </div>
       <div style={{ width: 800 }}>
-        <LineChart chartData={launchyData}></LineChart>
-        <BarChart chartData={launchyData}></BarChart>
+        <Bar options={chartOptions} data={chartData} />
       </div>
     </div>
   );

@@ -1,4 +1,3 @@
-from pickle import TRUE
 from typing import List
 
 from fastapi import FastAPI
