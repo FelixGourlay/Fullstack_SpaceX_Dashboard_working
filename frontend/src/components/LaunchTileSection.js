@@ -18,6 +18,7 @@ export const LaunchTileHolder = () => {
       <div className="DashboardOutput">
         <div className="TileContainer">
           {launchesData.map((launch, index) => {
+            const LaunchFailed = launch.success == 0;
             return (
               <div className="LaunchInfoTile">
                 <FontAwesomeIcon
@@ -27,7 +28,7 @@ export const LaunchTileHolder = () => {
                 <p key={index}>
                   Date: {launch.date} <br />
                   Name: {launch.name} <br />
-                  Success: {launch.success}
+                  Status: {LaunchFailed ? "Success" : "Failed"}
                 </p>
               </div>
             );

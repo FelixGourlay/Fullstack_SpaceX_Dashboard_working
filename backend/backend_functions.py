@@ -1,4 +1,7 @@
+import datetime
 from distutils.log import error
+import re
+from tkinter import E
 from pydantic import BaseModel
 import spacexpy
 
@@ -9,6 +12,7 @@ class Launch(BaseModel):
     year: int  # first for digits of date
     success: int  # 0 or 1
     name: str  # simple as
+    # past: str  # string with yes or no, could be bool but I had a problem getting that
 
 
 # create an instance of the api object
@@ -23,7 +27,8 @@ async def get_launches():
         my_launch_db.append(Launch(date=ln.date_utc.split('T')[0],
                                    year=ln.date_utc.split('-')[0],
                                    success=int(ln.success or 0),
-                                   name=ln.name))
+                                   name=ln.name,
+                                   ))  # past=check_launchdate_has_passed(ln)
     return my_launch_db
 
 
@@ -61,3 +66,14 @@ async def get_success_by_year():
         print(f'error was: {e}')
 
     return success_by_year
+
+
+# def check_launchdate_has_passed(launch):
+#     """quick function to control what is set for the launch att depending on date"""
+#     today = datetime.datetime.today()
+#     launch_date = datetime.datetime.strptime(
+#         launch.date, '%Y-%m-%d').date()
+#     if launch_date > today:
+#         return "Future"
+#     else:
+#         return "Past"

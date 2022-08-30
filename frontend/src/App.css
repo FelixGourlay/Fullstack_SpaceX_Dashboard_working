@@ -35,7 +35,7 @@ div {
 
 .ChartContainer {
   background-color: white;
-  width: 800px;
+  display: inline-flex;
   overflow-x: auto;
   white-space: nowrap;
 }
@@ -52,7 +52,9 @@ div {
     flex-wrap: wrap;
     justify-content: center;
     overflow-x: auto;
-    gap: 1em
+    gap: 1em;
+    margin: 5px;
+    
 }
 
 .LaunchInfoTile {

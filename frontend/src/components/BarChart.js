@@ -48,7 +48,7 @@ export const BarChart = ({ chartData }) => {
 
   return (
     <div className="DashboardSection">
-      <div className="SectionTitle">Individual rocket success:</div>
+      <div className="SectionTitle">Individual Launch Success:</div>
       <div className="DashboardOutput">
         <div className="ChartContainer">
           <div className="BarChart">
