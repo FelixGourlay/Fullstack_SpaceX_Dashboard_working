@@ -34,7 +34,7 @@ export const LineChart = ({ chartData }) => {
         labels: response.data.map((data) => data.year),
         datasets: [
           {
-            Label: "success rate",
+            label: "Average Launch Success Rate",
             data: response.data.map((data) => data.success),
             backgroundColor: "blue",
           },

@@ -32,7 +32,7 @@ export const BarChart = ({ chartData }) => {
         labels: response.data.map((data) => data.name),
         datasets: [
           {
-            Label: "success rate",
+            label: "Success Rate",
             data: response.data.map((data) => data.success),
             backgroundColor: "green",
             borderColor: "cyan",
@@ -43,6 +43,10 @@ export const BarChart = ({ chartData }) => {
     setBarChartOptions({
       responsive: true,
       maintainAspectRatio: false,
+      legend: {
+        display: true,
+        legendText: ["Success"],
+      },
     });
   }, []); // empty array should stop multiple renders and yet...
 
