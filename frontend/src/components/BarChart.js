@@ -34,6 +34,8 @@ export const BarChart = ({ chartData }) => {
           {
             Label: "success rate",
             data: response.data.map((data) => data.success),
+            backgroundColor: "green",
+            borderColor: "cyan",
           },
         ],
       })
@@ -42,7 +44,8 @@ export const BarChart = ({ chartData }) => {
       responsive: true,
       maintainAspectRatio: false,
     });
-  }, []);
+  }, []); // empty array should stop multiple renders and yet...
+
   return (
     <div className="DashboardSection">
       <div className="SectionTitle">Individual rocket success:</div>

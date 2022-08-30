@@ -58,6 +58,8 @@ div {
 .LaunchInfoTile {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 10%;
   background-color: pink;
   border: 5px solid #282c34;
   border-radius: 10px;
@@ -66,4 +68,10 @@ div {
 
 .LaunchInfoTile p {
   font-weight: bold;
+}
+
+.Icon{
+  color: maroon;
+  background-color: #ff000020;
+  padding: 10px;
 }

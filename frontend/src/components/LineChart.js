@@ -36,6 +36,7 @@ export const LineChart = ({ chartData }) => {
           {
             Label: "success rate",
             data: response.data.map((data) => data.success),
+            backgroundColor: "blue",
           },
         ],
       })
@@ -44,7 +45,7 @@ export const LineChart = ({ chartData }) => {
       responsive: true,
       maintainAspectRatio: false,
     });
-  }, []);
+  }, []); // empty array should stop multiple renders and yet...
   return (
     <div className="DashboardSection">
       <div className="SectionTitle">Average Success by Year:</div>

@@ -10,7 +10,7 @@ export const LaunchTileHolder = () => {
     axios
       .get("/api/launches")
       .then((response) => setLaunchesData(response.data));
-  }, []);
+  }, []); // empty array should stop multiple renders and yet...
 
   return (
     <div className="DashboardSection">
@@ -20,11 +20,14 @@ export const LaunchTileHolder = () => {
           {launchesData.map((launch, index) => {
             return (
               <div className="LaunchInfoTile">
-                {/* <FontAwesomeIcon icon=(faRocket) /> */}
+                <FontAwesomeIcon
+                  icon={faRocket}
+                  className="Icon"
+                ></FontAwesomeIcon>
                 <p key={index}>
                   Date: {launch.date} <br />
                   Name: {launch.name} <br />
-                  success: {launch.success}
+                  Success: {launch.success}
                 </p>
               </div>
             );
