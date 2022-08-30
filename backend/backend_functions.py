@@ -27,7 +27,7 @@ async def get_launches():
     return my_launch_db
 
 
-def get_average_success(year_list):
+def get_average_success(year_list: list) -> int:
     """Returns the average of the 'success' attributes (read: ints) of the list of objects pass"""
     try:
         lst_avg = sum(ln.success for ln in year_list) / len(year_list)
